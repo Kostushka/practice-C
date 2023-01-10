@@ -2,60 +2,48 @@
 #include <ctype.h>
 
 // Программа, которая преобразует строку 16-чных цифр в число
-
+int getNum (char c);
 int htoi (char s[]);
 
 int main (void) {
 
-    char s[] = "F";
+    char s[] = "0xfffF";
 
-    printf("%x\n", htoi(s));
+    printf("%0X: %d\n", htoi(s), htoi(s));
 
     return 0;
 }
 
 
 int htoi (char s[]) {
-    int i, n;
 
-    n = 0x0;
+    int i, start, c, res;
 
-    if (s[0] == '0' && tolower(s[1]) == 'x') {
-        for (i = 2; s[i] >= '0' && s[i] <= '9' || tolower(s[i]) >= 'a' && tolower(s[i]) <= 'f'; ++i) { 
-            if (s[i] >= '0' && s[i] <= '9') {
-                n = n * 10 + (s[i] - '0');
-            } else {
-                n = n * 10 + s[i];
-            }
-        }
-    } else {
-        for (i = 0; s[i] >= '0' && s[i] <= '9' || tolower(s[i]) >= 'a' && tolower(s[i]) <= 'f'; ++i) {
-            if (s[i] >= '0' && s[i] <= '9') {
-                n = n * 10 + (s[i] - '0');
-            } else {
-                n = n * 10 + s[i];
-            }
-        }
+    start = res = 0;
+
+    if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X')) {
+        start = 2;
     }
-  
-    
 
-    printf("%s %x \n", s, n );
+    for (i = start; (c = getNum(s[i])) != -1; ++i) {
+        res = res * 16 + c;
+    }
 
-    return n;
+    return res;
 }
-// int htoi (char s[]) {
-//     int i, n;
 
-//     n = 0x0;
+int getNum (char c) {
+    if (c >= '0' && c <= '9') {
+        return c - '0';
+    }
 
-//     if (s[i] >= '0' && s[i] <= '9') {
-//         for (i = 0; s[i] >= '0' && s[i] <= '9'; ++i) {
-//             n = n * 10 + (s[i] - '0');
-//         }
-//     } else if (tolower(s[i]) >= 'a' && tolower(s[i]) <= 'f') {
-//         n = n * 10 + s[i];
-//     }    
+    if (c >= 'A' && c <= 'F') {
+        return c - 'A' + 10;
+    }
 
-//     return n;
-// }
+    if (c >= 'a' && c <= 'f') {
+        return c - 'a' + 10;
+    }
+
+    return -1;
+}
