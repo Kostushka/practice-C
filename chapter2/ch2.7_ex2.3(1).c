@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <ctype.h>
 
+// Упр. 2.3 (1)
 // Программа, которая преобразует строку 16-чных цифр в число
 int getNum (char c);
 int htoi (char s[]);

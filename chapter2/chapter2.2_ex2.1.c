@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <float.h>
 // 2.2 Типы данных и их размеры:
+// Упр 2.1 Программа для определения диапазонов переменных типов char short int long float double - библиотечно и с помощью вычислений
 
 // char, int, float, double
 

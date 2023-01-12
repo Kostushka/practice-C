@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// Упр. 2.10
 // tolowerCase с тернарным оператором
 char tolowerCase (char s);
 
