@@ -10,6 +10,7 @@ double pop (void) {
 		--iCalc;
 		return stackCalc[iCalc];
 	} else {
+		printf("stack empty\n");
 		return 0.0;
 	}
 }
@@ -18,5 +19,7 @@ void push (double f) {
 	if (iCalc < MAX) {
 		stackCalc[iCalc] = f;
 		++iCalc;
+	} else {
+		printf("stack full");
 	}
 }
