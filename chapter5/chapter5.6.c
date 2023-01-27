@@ -1,5 +1,6 @@
 #include <stdio.h>
-#define MAX 100
+#define MAX 5000 // максимальное количество строк
+#define MAXLEN 1000 // максимальная длина строки из входного потока
 
 // 5.6 Массивы указателей и указатели на указатели
 // Указатель - переменная, поэтому ее можно хранить в массиве
@@ -15,21 +16,43 @@
 // осортировать строки
 // вывести в отсортированном порядке
 
-int getlines (char *s);
+// массив указателей для строк
+char *strp[MAX];
+
+char buf[MAX];
+char *bufi = buf; // указатель на след. свободный элемент
+
+int mygetline (char *s);
+int mystrcmp (char *s, char *t);
+void swap (char *v[], int i, int j);
+char* alloc (int a);
+int readlines (void);
+void qsort (char *strp[], int start, int end);
+void writeline (int n);
 
 int main (void) {
 
-	char s[MAX];
+	int n; // кол-во строк
 
-	printf("%d %s\n", getlines(s), s);
+	// если возвращенное значение положительно
+	// сортируем и выводим на печать
+	if ((n = readlines()) >= 0) {
+		qsort(strp, 0, n - 1);
+		writeline(n);
+		return 0;
+	// иначе ошибка: превышен лимит строк
+	} else {
+		printf("Error: too match srings");
+		return 1;
+	}
 
 	return 0;
 }
 
-int getlines (char *s) {
+int mygetline (char *s) {
 	int c, i;
 	i = 0;
-	while (i++ < MAX - 1) {
+	while (i++ < MAXLEN - 1) {
 		if ((c = getchar()) != EOF && c != '\n') {
 			*s++ = c;
 		} else {
@@ -42,4 +65,51 @@ int getlines (char *s) {
 	*s = '\0';
 	
 	return i;
+}
+
+int mystrcmp (char *s, char *t) {
+	while (*s == *t) {
+		if (*s == '\0') {
+			return 0;
+		}
+		++s;
+		++t;
+	}
+	return *s - *t;
+}
+
+char* alloc (int a) {
+	// есть место для строки
+	if (buf + MAX - bufi >= a) {
+		bufi += a;
+		return bufi - a;
+	// нет места для строки
+	} else {
+		return 0;
+	}
+}
+
+void qsort (char *strp[], int start, int end) {
+	int pivot, i;
+	if (start >= end) {
+		return;
+	}
+	swap(strp, start, (start + end) / 2);
+	pivot = start;
+	for (i = start + 1; i <= end; i++) {
+		if (mystrcmp(strp[start], strp[i]) > 0) {
+			swap(strp, ++pivot, i);
+		}
+	}
+	swap(strp, pivot, start);
+	qsort(strp, start, pivot - 1);
+	qsort(strp, pivot + 1, end);
+}
+
+// меняем местами указатели
+void swap (char *v[], int i, int j) {
+	char *p;
+	p = v[i]; // берем указатель из массива по индексу
+	v[i] = v[j]; 
+	v[j] = p;
 }
