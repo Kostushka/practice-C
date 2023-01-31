@@ -147,8 +147,9 @@ struct Tnode *talloc (void) {
 char *mystrdup (char *s) {
 
 	char *p;
-	
-	// for (int i = 0; s[i] != '\0'; i++);
+
+	// int i;
+	// for (i = 0; s[i] != '\0'; i++);
 	
 	p = (char *) malloc(strlen(s) + 1); // длина строки + \0
 	
