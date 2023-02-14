@@ -22,15 +22,15 @@ int main (void) {
                     putchar(c);
                 }
                 printf("\n");
-                for (i = 0; i < 10; i++) {
-                    line[i] = 0;
-                }
+                // for (i = 0; i < 10; i++) {
+                    // line[i] = 0;
+                // }
                 count = 0;
             }      
         } else {
-            for (i = 0; i < 10; i++) {
-                line[i] = 0;
-            }
+            // for (i = 0; i < 10; i++) {
+                // line[i] = 0;
+            // }
             count = 0;
         }
     }

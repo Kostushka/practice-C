@@ -1,56 +1,51 @@
 #include <stdio.h>
-#define IN 1
-#define OUT 0
+#define MAX 100
 // Упр. 1.18
 // Программа для удаления лишних пробельных символов в хвосте каждой поступающей строки 
 // и удаления пустых строк
 
-void deleteSpace (char s[]);
+// поступают строки с входного потока
+// удалить все лишние пробельные символы в конце строки
+// пропустить пустую строку
 
-int main (void) {
+int mygetline(char s[], int max);
 
-    int c, i;
-    char s[1000];
+int main(void) {
+	char line[MAX];
+	int len;
 
-    for (i = 0; i < 1000 - 2 && (c = getchar()) != EOF && c != '\n'; ++i) {
-        s[i] = c;
-    }
-    if (c == '\n') {
-        s[i] = '\n';
-        ++i;
-    }
-    s[i] = '\0';
-
-    // deleteSpace(s);
-    // printf("%s", s);
-    char g[] = "Hello      ";
-    deleteSpace(g);
-    printf("%s", g);
+	while ((len = mygetline(line, MAX)) > 0) {
+		// пропускаем нулевой символ
+		--len;
+		while (line[len] == ' ' || line[len] == '\t' || line[len] == '\n') {
+			// пропускаем пробельные символы
+			--len;
+		}
+		// если строка не пустая, добавляем нулевой символ и выводим
+		if (len > 0) {
+			line[len + 1] = '\0';
+			printf("%s\n", line);
+		}
+	}
 
     return 0;
 }
 
-void deleteSpace (char s[]) {
+int mygetline(char s[], int max) {
+	int c, i;
 
-    int i, k, state;
+	for (i = 0; i < max - 1; i++) {
+		if ((c = getchar()) != EOF && c != '\n') {
+			s[i] = c;
+		} else {
+			break;
+		}
+	}
+	if (c == '\n') {
+		s[i++] = c;
+	}
 
-    i = k = 0;
-    state = OUT;
+	s[i] = '\0';
 
-    if (s[0] == '\n') {
-        s[0] = '\0';
-    }
-
-    while (s[i] != '\0') {
-        if (s[i] != ' ') {
-            state = IN;
-            s[k++] = s[i];
-        } else if (state == IN) {
-            state = OUT;
-            s[k++] = s[i];
-        }
-        ++i;
-    }
-    s[i] = '\0';
-
+	return i;
 }

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define MAX 1000
+#define MAX 100
 
 // Упр. 1.19
 // Программа, которая переписывает каждую строку во входном потоке в обратном порядке по очереди
@@ -16,7 +16,7 @@ int main (void) {
     i = 0;
 
     while ((c = getchar()) != EOF) {
-        if (c != '\n' && i < MAX - 2) {
+        if (c != '\n' && i < MAX - 1) {
             str[i++] = c;
         } else {
             str[i] = '\0';
@@ -55,5 +55,4 @@ void reverse (char s[]) {
     while ((s[i] = s2[i]) != '\0') {
         ++i;
     } 
-    s[i] = '\0';
 }
