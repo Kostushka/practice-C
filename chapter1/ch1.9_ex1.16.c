@@ -30,24 +30,38 @@ int mygetline(char s[], int max) {
 	int count, c, i;
 
 	count = i = 0;
-	
-	while ((c = getchar()) != EOF) {
-	
+
+	// не делаем лишних проверок на наличие места в буфере
+	while ((c = getchar()) != EOF && c != '\n' && i < max - 1) {
 		// пока в буфере есть место
-		if (i < max - 1) {
-			s[i++] = c;
-		}
-		
+		s[i++] = c;	
 		// считаем количество символов пока не \n
-		if (c != '\n') {
-			++count;
-		} else {
-			break;
-		}
+		++count;
 	}
-	
+
 	s[i] = '\0';
 
+	if (c == '\n' || c == EOF) {
+		return count;
+	}
+	
+	while ((c = getchar()) != EOF && c != '\n') {	
+		// считаем количество символов пока не \n
+		++count;	
+	}
+
+	// каждый раз проверяем условие: есть ли в буфере место
+	// while ((c = getchar()) != EOF && c != '\n') {
+	// 	// пока в буфере есть место
+	// 	if (i < max - 1) {
+	// 		s[i++] = c;
+	// 	}
+	// 	// считаем количество символов пока не \n
+	// 	++count;
+	// }
+	// s[i] = '\0';
+	// return count;
+	
 	return count;
 }
 
