@@ -1,10 +1,12 @@
 #include <stdio.h>
 
-void qsort (int s[], int startI, int endI);
+void qsort (char s[], int startI, int endI);
+void swap (char v[], int a, int b);
+
 
 int main (void) {
 
-	int s[] = {23, 3, 8, 45, 2, 90};
+	char s[] = {23, 3, 8, 45, 2, 90};
 
 	printf("до сортировки: \n");
 	for (int i = 0; i < 6; i++) {
@@ -23,20 +25,19 @@ int main (void) {
 	return 0;
 }
 
-void qsort (int s[], int startI, int endI) {
-
-	int mid, i;
-	void swap (int v[], int a, int b);
+void qsort (char s[], int startI, int endI) {
 
 	if (startI >= endI) {
 		return; // если 1 элемент в массиве, выходим
 	}
 
+	int mid, i;
+
 	// меняем местами первый и средний элемент
 	swap(s, startI, (startI + endI) / 2);
 
 	mid = startI;
-
+	
 	// пробегаемся и меняем местами элементы
 	// те, что меньше среднего, переносим в левый край
 	for (i = startI + 1; i <= endI; i++) {
@@ -56,8 +57,8 @@ void qsort (int s[], int startI, int endI) {
 }
 
 // поменять местами элементы
-void swap (int v[], int a, int b) {
-	int c;
+void swap (char v[], int a, int b) {
+	char c;
 	c = v[a];
 	v[a] = v[b];
 	v[b] = c;

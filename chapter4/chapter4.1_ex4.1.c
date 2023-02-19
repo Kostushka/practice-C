@@ -50,7 +50,7 @@ int myGetline (char s[]) {
 
     int c, i;
 
-    for (i = 0; i < LIM - 2; i++) {
+    for (i = 0; i < LIM - 1; i++) {
         if ((c = getchar()) != EOF && c != '\n') {
             s[i] = c;       
         } else {
@@ -83,13 +83,34 @@ int strindex (char s[], char pattern[]) {
     return -1;
 }
 
+// could could
+// right: 7
+
 int strrindex (char s[], char t[]) {
-    int i, j, k;
+    int i, j, k, res;
+    res = 0;
     for (i = 0; s[i] != '\0'; i++) {
         for (j = i, k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++);
         if (k > 0 && t[k] == '\0') {
-            return j - 1;
+            res = i;
         }
+    }
+    if (res) {
+    	return res;
     }
     return -1;
 }
+
+// could
+// right: 4
+
+// int strrindex (char s[], char t[]) {
+    // int i, j, k;
+    // for (i = 0; s[i] != '\0'; i++) {
+        // for (j = i, k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++);
+        // if (k > 0 && t[k] == '\0') {
+            // return j - 1;
+        // }
+    // }
+    // return -1;
+// }

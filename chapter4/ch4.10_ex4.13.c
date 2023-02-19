@@ -7,7 +7,7 @@
 void reverse (char s[], int start, int end);
 
 int main (void) {
-	char s[] = "123456789";
+	char s[] = "12345";
 	int end;
 	for (end = 0; s[end] != '\0'; end++);
 	
@@ -20,15 +20,17 @@ int main (void) {
 
 void reverse (char s[], int start, int end) {
 
+	if (start >= end) {
+		return;
+	}
+	
+	
 	int c;
 	// поменять местами [x ... y]
 	c = s[start];
 	s[start] = s[end];
-	s[end] = c;
-	
-	if (start < end) {
-		// передать следующие элементы [y a ... b x] - reverse(a, b)
-		reverse(s, ++start, --end);
-	}	
-	
+	s[end] = c;	
+
+	reverse(s, start + 1, end - 1);
+
 }

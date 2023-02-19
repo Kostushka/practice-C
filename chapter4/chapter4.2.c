@@ -77,7 +77,7 @@ double atof (char s[]) {
 
 int myGetline (char s[]) {
     int c, i;
-    for (i = 0; i < MAX - 2; i++) {
+    for (i = 0; i < MAX - 1; i++) {
         if ((c = getchar()) != EOF && c != '\n') {
             s[i] = c;
         } else {
@@ -85,7 +85,8 @@ int myGetline (char s[]) {
         }
     }
     if (c == '\n') {
-        s[i] = '\0'; 
+        s[i++] = '\0'; 
     }
+    
     return i;
 }
