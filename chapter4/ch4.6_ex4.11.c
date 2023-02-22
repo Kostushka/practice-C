@@ -47,11 +47,21 @@ int main(void) {
 	return 0;
 }
 
-int getop(char s[]) {
-	static int c;
-	int i;
+// 4 7 + 6 +
 
-	while ((s[0] = c = getchar()) == ' ' || c == '\t');
+int getop(char s[]) {
+	int c, i;
+	// статическая переменная
+	static int uc;
+
+	// если есть нечисловой символ и он не пробельный, записываем его и зануляем переменную с ним
+	if (uc && uc != ' ' && uc != '\t') {
+		s[0] = c = uc;
+		uc = 0;
+	} else {
+		while ((s[0] = c = getchar()) == ' ' || c == '\t');
+	}
+	
 	s[1] = '\0';
 
 	if (!isdigit(c) && c != '.') {
@@ -68,6 +78,11 @@ int getop(char s[]) {
 	}
 
 	s[i] = '\0';
+
+	if (c != EOF) {
+		// записываем символ после числа
+		uc = c;
+	}
 
 	return NUM;
 }

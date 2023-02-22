@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <math.h> // запускать lm
 #define MAX 100
 #define NUM 1
 
@@ -12,9 +13,9 @@ double pop(void);
 int getch(void);
 void ungetch(int c);
 int getop(char s[]);
-int sin(double c);
-double exp(double c);
-double pow(double c, int y);
+// int mysin(double c);
+double myexp(double c);
+double mypow(double c, int y);
 
 int main(void) {
 	double p;
@@ -47,7 +48,14 @@ int main(void) {
 				break;
             case '^':
                 p = pop();
-                push(pow(pop(), p));
+                push(mypow(pop(), p));
+                break;
+            // case 's':
+            	// push(sin(pop()));
+            	// break;
+            case 'e':
+            	push(myexp(pop()));
+            	break;
 			case '\n':
 				printf("%g\n", pop());
 				break;
@@ -59,12 +67,18 @@ int main(void) {
 	return 0;
 }
 
-double pow(double c, int y) {
+// возведение в степень
+double mypow(double c, int y) {
     double res = 1;
     while (y-- > 0) {
         res *= c;
     }
     return res;
+}
+
+// экспоненциальная запись
+double myexp(double c) {
+	return mypow(2.718, c);
 }
 
 double stack[MAX];
@@ -88,7 +102,7 @@ void push(double c) {
 }
 
 int getop(char s[]) {
-	int c, i, n;
+	int c, i;
 	
 	while((s[0] = c = getch()) == ' ' || c == '\t');
 	s[1] = '\0';

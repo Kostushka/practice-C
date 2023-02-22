@@ -5,16 +5,15 @@
 #define NUMBER 1
 
 // Упр. 4.4 
-// добавить реализацию команд 
+// добавить реализацию команд ??? (куда добавить?)
 // для вывода верхнего элемента стека без его удаления
 // для создания в стеке дубликата элемента
 // для обмена местами двух верхних элементов
-// очистка стека
+// для очистки стека
 
 void push (double f);
 double pop (void);
 int getop (char s[]);
-double atof (char s[]);
 int getch (void);
 void ungetch (int c);
 double change (void);
@@ -24,12 +23,8 @@ void clean(void);
 
 
 int main (void) {
-	// тип символа из входного потока
     int typeChar;
-    // массив, куда записывается число
     char s[MAX];
-    // для записи операнда
-    double op2;
 
     while ((typeChar = getop(s)) != EOF) {
     	switch (typeChar) {
@@ -43,19 +38,29 @@ int main (void) {
     			push(pop() * pop());
     			break;
     		case '-':
+    			// меняю местами
                 change();
     			push(pop() - pop());	
     			break;
     		case '/':
-    			op2 = pop();
-    			if (op2 != 0.0) {
-    				push(pop() / op2);
+    			// вывожу без удаления из стека
+    			if (print() != 0.0) {
+    				// меняю местами
+    				change();
+    				push(pop() / pop());
     			} else {
     				printf("error: / 0");
     			}
     			break;
+    		case '^':
+    			// дублирую элемент
+    			doubl();
+    			push(pop() * pop());
+    			break;
     		case '\n':
     			printf("result: %g\n", print());
+    			// очищаю стек
+    			clean();
     			break;
     		default: 
     			printf("error: %s not valid value\n", s);
@@ -68,13 +73,10 @@ int main (void) {
 }
 
 
-// стек
 double stack[MAX];
 
-// индекс в стеке
 int i = 0;
 
-// добавить в стек
 void push (double f) {
     if (i < MAX) {
         stack[i++] = f; 
@@ -82,7 +84,6 @@ void push (double f) {
         printf("error: stack full\n");
     }
 }
-// удалить из стека
 double pop (void) {
     if (i > 0) {
         return stack[--i];
@@ -92,9 +93,9 @@ double pop (void) {
     }
 }
 
+// вывод верхнего элемента без его удаления
 double print (void) {
     if (i > 0) {
-        // вывод верхнего элемента без его удаления
         return stack[i - 1];
     } else {
         printf("error: stack empty\n");
@@ -114,6 +115,7 @@ void doubl (void) {
     double d = stack[i - 1];
     push(d);
 }
+
 // очистка стека
 void clean(void) {
     if (i > 0) {
@@ -121,7 +123,6 @@ void clean(void) {
     }
 }
 
-// возвращает корректный символ из входного потока
 int getop (char s[]) {
 	int i, c;
 
@@ -135,36 +136,28 @@ int getop (char s[]) {
 	
 	i = 0;
 	if (isdigit(c)) {
-		// если первый символ цифра - заменяем нулевой символ и добавляем следующие, пока они числовые
 		while (isdigit(s[++i] = c = getch())); 
 	}
 	if (c == '.') {
-		// если первый нечисловой символ после числовых - точка, повторяем запись числовых смволов до первого нечислового
 		while (isdigit(s[++i] = c = getch()));
 	}
-	// перезаписываем нечисловой символ
 	s[i] = '\0';
 	if (c != EOF) {
-		// если нечисловой символ - не конец файла - записываем в буфер, с которого начнем извлечение следующего символа
 		ungetch(c);
 	}
-	return NUMBER; // работаем с числом
+	return NUMBER;
 	 	
 }
 
-// буфер для нечисловых символов, идущих после числовых
 char buf[MAX];
 int bufi = 0;
 
 int getch (void) {
-	// если буфер пуст, возвращаем символ из входного потока
-	// иначе символ из буфера
 	return (bufi > 0) ? buf[--bufi] : getchar();
 }
 
 void ungetch (int c) {
 	if (bufi < MAX) {
-		// добавляем нечисловой символ в буфер
 		buf[bufi++] = c;
 	} else {
 		printf("error: buf full\n");

@@ -31,29 +31,29 @@ void qsort (char s[], int startI, int endI) {
 		return; // если 1 элемент в массиве, выходим
 	}
 
-	int mid, i;
+	int pivot, i;
 
 	// меняем местами первый и средний элемент
 	swap(s, startI, (startI + endI) / 2);
 
-	mid = startI;
+	pivot = startI;
 	
 	// пробегаемся и меняем местами элементы
 	// те, что меньше среднего, переносим в левый край
 	for (i = startI + 1; i <= endI; i++) {
-		if (s[i] < s[mid]) {
-			swap(s, ++mid, i);
+		if (s[i] < s[pivot]) {
+			swap(s, ++pivot, i);
 		}
 	}
 
 	// обратная замена
-	swap(s, startI, mid);
+	swap(s, startI, pivot);
 
 	// левая часть
-	qsort(s, startI, mid - 1);
+	qsort(s, startI, pivot - 1);
 
 	// правая часть
-	qsort(s, mid + 1, endI);
+	qsort(s, pivot + 1, endI);
 }
 
 // поменять местами элементы
