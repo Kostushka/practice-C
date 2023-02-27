@@ -19,7 +19,7 @@ int main (void) {
     	}
     }
     if (maxn > 0) {
-    	printf("%s", maxline);
+    	printf("%s\n", maxline);
     }
 
     return 0;
@@ -30,7 +30,7 @@ int mygetline(char s[], int max) {
 	int count, c, i;
 
 	count = i = 0;
-
+	
 	// не делаем лишних проверок на наличие места в буфере
 	while ((c = getchar()) != EOF && c != '\n' && i < max - 1) {
 		// пока в буфере есть место
@@ -38,8 +38,8 @@ int mygetline(char s[], int max) {
 		// считаем количество символов пока не \n
 		++count;
 	}
-
-	s[i] = '\0';
+	
+	s[i] = '\0';	
 
 	if (c == '\n' || c == EOF) {
 		return count;
@@ -61,7 +61,7 @@ int mygetline(char s[], int max) {
 	// }
 	// s[i] = '\0';
 	// return count;
-	
+
 	return count;
 }
 
