@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
-
+#define MAX 100
 // Упр.3.3
 // Функция expand(s1, s2) -> 
 // разворачивает a-z -> abc...xyz
@@ -14,34 +14,33 @@ void expand (char s1[], char s2[]);
 
 int main (void) {
 
+	char s1[] = "-a-z0-9";
+	char s2[MAX];
+
+	expand(s1, s2);
+
+	printf("%s\n", s2);
+
     return 0;
 }
 
 void expand (char s1[], char s2[]) {
 
-    int i, j, length;
+    int i, v;
 
-    i = j = 0; 
+    i = v = 0; 
 
     // пропуск - в начале и в конце строки
-    for (length = 0; s1[length] != '\0'; length++);
-    if (s1[i] == '-' || s1[length - 1] == '-') {
-        ++i;
-        --length;
+    if (s1[i] == '-') {
+    	++i;
     }
 
-    while(s1[i] <= length - 1) {
-        if (s1[i] != '-') {
-            s2[j] = s1[i];
-        } else {
-            int a = --i;
-            ++i;
-            int b = ++i;
-            --i;
-
-        }
+    while (s1[i] != '\0') {
+    	for (int n = s1[i]; n <= s1[i+2]; n++) {
+    		s2[v++] = n;
+    	}    	
+    	i += 3;
     }
 
-   
-
+	s2[v] = '\0';
 }

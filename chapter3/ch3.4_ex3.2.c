@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#define LIM 100
 // Упр. 3.2
 // Функция escape(s, t) -> 
 // копирует строку t в строку s
@@ -9,29 +9,28 @@
 void escape(char s[], char t[]);
 
 int main (void) {
-    char s[20];
-    char t[] = "H   e   l   l   o!";
-
+    char s[LIM];
+    char t[] = "H e l l o!";
+    printf("%s", t);
     escape(s, t);
-    printf("%s %s\n", s, t);
+    printf("%s", s);
 
     return 0;
 }
 
 void escape (char s[], char t[]) {
 
-    int i;
+	int len, i;
 
-    for (i = 0; t[i] != '\0'; ++i) {
+	for (len = 0; t[len] != '\0'; len++);
+
+    for (i = 0; i <= len; ++i) {
         switch (t[i]) {
-            case '\n':
-                s[i] = '\\';
-                s[++i] = 'n';
+            case '\0':
+                s[i] = '\n';
                 break;
-            case '\t':
-                // не попадает
-                s[i] = '\\';
-                s[++i] = 't';
+            case ' ':
+                s[i] = '\t';
                 break;
             default: 
                 s[i] = t[i];

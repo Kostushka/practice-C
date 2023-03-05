@@ -7,15 +7,15 @@
 // '91'
 // '19'
 void itob (int n, char s[], int b);
-
+int getNum(int n);
 void reverse (char s[]);
 
 int main (void) {
 
     int a, b;
     char s[10];
-    a = 25;
-    b = 9;
+    a = 26;
+    b = 16;
 
     itob(a, s, b);
     printf("%s\n", s);
@@ -34,7 +34,8 @@ void itob (int n, char s[], int b) {
     // остаток от деления == символ
     // делим, пока число > 0
     do {
-        s[i++] = n % b + '0';
+        // s[i++] = n % b + '0';
+        s[i++] = getNum(n % b);
     } while ((n /= b) > 0);
 
     // записываем знак, если он есть
@@ -58,4 +59,12 @@ void reverse (char s[]) {
         s[j] = c;
     }
 
+}
+
+int getNum(int n) {
+	if (n >= 10) {
+		// 58 + 7 = 65
+		return n + '0' + 7;
+	}
+	return n + '0'; 
 }

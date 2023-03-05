@@ -20,6 +20,8 @@ int atoi (char s[]);
 
 void reverse (char s[]);
 
+void shellsort(char s[], int n);
+
 int main (void) {
 
     char s[] = "    -123";
@@ -29,6 +31,13 @@ int main (void) {
     printf("%s\n", str);
 
     printf("%d\n", atoi(s));
+
+	char el[] = {23, 45, 2, 9, 44, 1, 89, 54, 3, -12, 8, 0};
+	int len = 12;
+    shellsort(el, len);
+	for (int n = 0; n < len; n++) {
+		printf("%d\t", el[n]);
+	}	
 
     return 0;
 }
@@ -81,4 +90,22 @@ void reverse (char s[]) {
     //     s[i] = s[j];
     //     s[j] = c;
     // }
+}
+
+// сортировка массива целых чисел
+void shellsort(char s[], int n) {
+	int gap, i, j;
+	// меняет расстояние между сравниваемыми элементами
+	for (gap = n / 2; gap > 0; gap /= 2) {
+		// следующий шаг - перебор элементов
+		for (i = gap; i < n; i++) {
+			// 										0         3
+			// замена элементов при необходимости [25 ..gap.. 1]
+			for (j = i - gap; j >= 0 && s[j] > s[j+gap]; j -= gap) {
+				int temp = s[j];
+				s[j] = s[j + gap];
+				s[j + gap] = temp;
+			}
+		}
+	}
 }
