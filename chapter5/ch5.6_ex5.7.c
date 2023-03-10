@@ -46,7 +46,7 @@ int mygetline (char *s) {
 	}
 
 	*s = '\0';
-	
+
 	return i;
 }
 
@@ -93,14 +93,15 @@ int readlines (char *buf) {
 
 	nlines = 0;
 	while ((len = mygetline(line)) > 0) {
-        if (buf + MAX - p >= len && nlines < MAX) {
-			++len;
-            p += len;
-            mystrcpy(p - len, line);
+		// +1 для нулевого символа
+		++len;
+		if (buf + MAX - p >= len && nlines < MAX) {
+			p += len;
+			mystrcpy(p - len, line);
 			strp[nlines++] = p - len;
-        } else {
+		} else {
 			return -1;
-        }
+		}
 	}
 	return nlines;
 }
@@ -112,5 +113,8 @@ void writeline (int n) {
 }
 
 void mystrcpy (char *p, char *s) {
-	while ((*p++ = *s++) != '\0');
+	while ((*p = *s) != '\0') {
+		++p;
+		++s;
+	}
 }

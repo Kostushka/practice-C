@@ -12,10 +12,9 @@ int pop (void);
 
 int main (int argc, char *argv[]) {
 	int num, op;
-	++argv;
 	while (--argc > 0) {
-		printf("arg: %s\n", *argv);
-		switch (*argv[0]) {
+		printf("arg: %s\n", *(argv + 1));
+		switch ((*++argv)[0]) {
 			case '+': 
 				push(pop() + pop());
 				break;
@@ -23,7 +22,9 @@ int main (int argc, char *argv[]) {
 				op = pop();
 				push(pop() - op);
 				break;
-			case '*': 
+			// * развертывает имя файлов
+			// case '*':
+			case 'x':
 				push(pop() * pop());
 				break;
 			case '/': 
@@ -32,22 +33,19 @@ int main (int argc, char *argv[]) {
 					push(pop() / op);	
 				} 
 				break;
-			case ' ': 
-				printf(" ");
-				break;
-			case '\n':
-				printf("%d\n", pop());
-				break;
 			default:
+				push(atoi(*argv));
 				break;
 			
 		}
-		if (isdigit(num = atoi(*argv))) {
-			push(num);
-		}
-		++argv;
+		// ???
+		// if (isdigit(num = atoi(*argv))) {
+			// printf("lala");
+			// push(num);
+		// }
 
 	}
+	printf("%d\n", pop());
 		
 	
 	return 0;
@@ -59,7 +57,6 @@ int atoi (char *s) {
 	for (i = 0; s[i] != '\0'; i++ ) {
 		n = n * 10 + (s[i] - '0');
 	}
-	printf("%d\n", n);
 	return n;
 }
 

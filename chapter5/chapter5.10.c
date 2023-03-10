@@ -71,6 +71,7 @@ int mygetline (char *s) {
 
 	if (c == '\n') {
 		*s++ = c;
+		++i;
 	}
 	*s = '\0';
 	
