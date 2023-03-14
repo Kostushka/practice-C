@@ -75,7 +75,6 @@ struct Key *bisearch (char *s, struct Key *k) {
 
 	while (low < high) {
 		mid = low + (high - low) / 2;
-        k = mid;
 		// передаем указатели для посимвольного сравнения
 		if ((res = strcmp(s, mid->word)) < 0) {
 			high = mid;
