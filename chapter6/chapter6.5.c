@@ -131,9 +131,8 @@ void treeprint (struct Tnode *p) {
 	if (p != NULL) {
 		// рекурсивно доходим до конца левой ветки
 		treeprint(p->left);
-		// печатаем всю левую ветку и корень
+		
 		printf("%d %s\n", p->count, p->word);
-		// рекурсивно доходим до конца правой ветки и печатаем
 		treeprint(p->right);
 	}	
 }
