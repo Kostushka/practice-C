@@ -41,7 +41,7 @@ char *mystrdup (char *s);
 int main (void) {
 	char k[] = "city";
 	char v[] = "Moscow";
-	printf("%s %s\n", install(k, v)->key, install(k, v)->value);
+	printf("%s %s\n", install(k, v)->value, install(k, v)->value);
 	install("city2", "Sevastopol");
 	printf("%s\n", hashtab[hash("city2")]->value);
 	printf("index: %d %d\n", hash(k), hash("city2"));
