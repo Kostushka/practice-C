@@ -18,7 +18,8 @@ int main (int argc, char *argv[]) {
 	}
 
 	// если первая буква имени программы - маленькая, то входные данные выводим в нижнем регистре
-	if (*argv[0] - tolower(*argv[0]) == 0) {
+	// if (*argv[0] - tolower(*argv[0]) == 0) {
+	if (*argv[0] == tolower(*argv[0])) {
 		while ((c = getchar()) != EOF) {
 			putchar(tolower(c));
 		}
