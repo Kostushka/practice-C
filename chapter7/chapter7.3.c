@@ -10,14 +10,14 @@
 void minprintf (char *fmt, ...); // аргументы: указатель на тип char, аргументы переменной длины
 
 int main (void) {
-	minprintf("Hello %d, %s, %f, %c!\n", 23, "lala", 23.6, 't');
+	minprintf("Hello %d, %s, %f, %c %o %x!\n", 23, "lala", 23.6, 't', 10, 10);
 	return 0;
 }
 
 void minprintf (char *fmt, ...) {
 	va_list ap;
 	char *p, *sval, cval;
-	int ival;
+	int ival, oval, xval;
 	double dval;
 
 	va_start(ap, fmt);
@@ -43,6 +43,15 @@ void minprintf (char *fmt, ...) {
 			case 'c':
 				cval = va_arg(ap, int);
 				putchar(cval);
+				break;
+			case 'o':
+				oval = va_arg(ap, int);
+				printf("%o", oval);
+				break;
+			case 'x':
+			case 'X':
+				xval = va_arg(ap, int);
+				printf("%x", xval);
 				break;
 			default:
 				putchar(*sval);
