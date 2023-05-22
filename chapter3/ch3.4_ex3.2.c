@@ -1,5 +1,6 @@
 #include <stdio.h>
 #define LIM 100
+
 // Упр. 3.2
 // Функция escape(s, t) -> 
 // копирует строку t в строку s
@@ -7,12 +8,15 @@
 // конвертирует символ табуляции -> \t
 
 void escape(char s[], char t[]);
+void unescape(char s[], char t[]);
 
 int main (void) {
     char s[LIM];
-    char t[] = "H e l l o!";
+    char t[] = "H\tel\\gl\to!\n";
     printf("%s", t);
     escape(s, t);
+    printf("%s\n", s);
+    unescape(s, t);
     printf("%s", s);
 
     return 0;
@@ -20,22 +24,48 @@ int main (void) {
 
 void escape (char s[], char t[]) {
 
-	int len, i;
+	int k = 0;
 
-	for (len = 0; t[len] != '\0'; len++);
-
-    for (i = 0; i <= len; ++i) {
+    for (int i = 0; t[i] != '\0'; ++i) {
         switch (t[i]) {
-            case '\0':
-                s[i] = '\n';
+            case '\t':
+                s[k++] = '\\';
+                s[k++] = 't';
                 break;
-            case ' ':
-                s[i] = '\t';
+            case '\n':
+                s[k++] = '\\';
+                s[k++] = 'n';
                 break;
             default: 
-                s[i] = t[i];
+                s[k++] = t[i];
                 break;
         }
     }
-    s[i] = '\0';
+    
+    s[k] = '\0';
+}
+
+// H'\\''t'ell'\\''t'o!''\\''n'
+
+void unescape(char s[], char t[]) {
+	int k = 0;
+	for (int i = 0; t[i] != '\0'; i++) {
+		if (t[i] == '\\') {
+			switch(t[++i]) {
+				case 't':
+					s[k++] = '\t';
+					break;
+				case 'n':
+					s[k++] = '\n';
+					break;
+				default:
+					s[k++] = t[i - 1];
+					s[k++] = t[i];
+					break;
+			}
+		} else {
+			s[k++] = t[i];
+		}
+	}
+	s[k] = '\0';
 }
