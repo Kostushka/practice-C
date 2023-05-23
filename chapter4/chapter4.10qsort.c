@@ -6,18 +6,18 @@ void swap (char v[], int a, int b);
 
 int main (void) {
 
-	char s[] = {23, 3, 8, 45, 2, 90};
+	char s[] = {23, 3, 8, 45, 2, 90, 0, 4, 5};
 
 	printf("до сортировки: \n");
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 9; i++) {
 		printf("%d ", s[i]);
 	}
 	printf("\n");
 
-	qsort(s, 0, 5);
+	qsort(s, 0, 8);
 
 	printf("после сортировки: \n");
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 9; i++) {
 		printf("%d ", s[i]);
 	}
 	printf("\n");
@@ -41,7 +41,7 @@ void qsort (char s[], int startI, int endI) {
 	// пробегаемся и меняем местами элементы
 	// те, что меньше среднего, переносим в левый край
 	for (i = startI + 1; i <= endI; i++) {
-		if (s[i] < s[pivot]) {
+		if (s[i] < s[startI]) {
 			swap(s, ++pivot, i);
 		}
 	}
