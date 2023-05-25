@@ -14,6 +14,11 @@ int main (void) {
 	// вызываем функцию для получения чисел из входного потока
 	// числа записываем в массив с ячейками для каждого числа
 	int numbers[MAX], i;
+	// int *p = numbers;
+	// for (i = 0; i < MAX && getint(p) != EOF; p++) {
+		// printf("%d: %d\n", i, numbers[i]);
+		// ++i;
+	// }
 	for (i = 0; i < MAX && getint(&numbers[i]) != EOF; i++) {
 		printf("%d: %d\n", i, numbers[i]);
 	}

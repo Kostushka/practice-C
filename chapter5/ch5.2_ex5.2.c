@@ -29,7 +29,7 @@ int getfloat (double *n) {
 	while (isspace(c = getch()));
 
 	// записываем не число и выходим
-	if (!isdigit(c) && c != EOF && c != '+' && c != '-') {
+	if (!isdigit(c) && c != EOF && c != '+' && c != '-' && c != '.') {
 		ungetch(c);
 		return 0;
 	}
