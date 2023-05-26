@@ -12,7 +12,6 @@ int mygetline (char *s);
 int mystrcmp (char *s, char *t);
 void mystrcpy (char *p, char *s);
 void swap (char *v[], int i, int j);
-char* alloc (int a);
 int readlines (char *buf);
 void qsort (char *strp[], int start, int end);
 void writeline (int n);
