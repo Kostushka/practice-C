@@ -42,7 +42,6 @@ struct Key *bisearch (char *s, struct Key *k);
 // int mystrcmp (char *s, char *k);
 
 int main (void) {
-	int n;
 	char word[MAXLENGTH];
     struct Key *p;
 	
