@@ -25,9 +25,14 @@ struct {
 
 int main (void) {
 
-	symtab[0].u.ival;
-	*symtab[0].u.sval;
-	symtab[0].u.sval[0];
+	symtab[0].u.ival = 25;
+	symtab[1].u.sval = "string";
+	// symtab[1].u.sval[0];
+	symtab[2].u.fval = 123.89;
+	
+	printf("%d\n", symtab[0].u.ival);
+	printf("%c\n", *symtab[1].u.sval);
+	printf("%.2f\n", symtab[2].u.fval);
 
 	return 0;
 }
