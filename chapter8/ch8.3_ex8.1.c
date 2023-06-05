@@ -38,9 +38,8 @@ int main(int argc, char *argv[]) {
 			return 1;
 		}
 		filecpy(f1, 1);
-	} else {
-		printf("error\n");
-	}
+	} 
+	
 	return 0;
 }
 
@@ -48,6 +47,7 @@ void filecpy(int in, int out) {
 	char buf[BUFSIZ];
 	int n;
 
-	n = read(in, buf, BUFSIZ);
-	write(out, buf, n);
+	while ((n = read(in, buf, BUFSIZ)) > 0) {
+		write(out, buf, n);
+	}
 }
